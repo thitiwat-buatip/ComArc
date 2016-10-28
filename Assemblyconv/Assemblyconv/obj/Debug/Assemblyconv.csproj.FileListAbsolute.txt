@@ -1,0 +1,6 @@
+c:\users\lenovo_z51-70\documents\visual studio 2015\Projects\Assemblyconv\Assemblyconv\bin\Debug\Assemblyconv.exe.config
+c:\users\lenovo_z51-70\documents\visual studio 2015\Projects\Assemblyconv\Assemblyconv\obj\Debug\Assemblyconv.csprojResolveAssemblyReference.cache
+c:\users\lenovo_z51-70\documents\visual studio 2015\Projects\Assemblyconv\Assemblyconv\bin\Debug\Assemblyconv.exe
+c:\users\lenovo_z51-70\documents\visual studio 2015\Projects\Assemblyconv\Assemblyconv\bin\Debug\Assemblyconv.pdb
+c:\users\lenovo_z51-70\documents\visual studio 2015\Projects\Assemblyconv\Assemblyconv\obj\Debug\Assemblyconv.exe
+c:\users\lenovo_z51-70\documents\visual studio 2015\Projects\Assemblyconv\Assemblyconv\obj\Debug\Assemblyconv.pdb
