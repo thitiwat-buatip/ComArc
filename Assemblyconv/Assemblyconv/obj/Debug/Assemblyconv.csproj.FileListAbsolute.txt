@@ -4,3 +4,9 @@ c:\users\lenovo_z51-70\documents\visual studio 2015\Projects\Assemblyconv\Assemb
 c:\users\lenovo_z51-70\documents\visual studio 2015\Projects\Assemblyconv\Assemblyconv\bin\Debug\Assemblyconv.pdb
 c:\users\lenovo_z51-70\documents\visual studio 2015\Projects\Assemblyconv\Assemblyconv\obj\Debug\Assemblyconv.exe
 c:\users\lenovo_z51-70\documents\visual studio 2015\Projects\Assemblyconv\Assemblyconv\obj\Debug\Assemblyconv.pdb
+C:\Users\Subin\Documents\GitHub\ComArc\Assemblyconv\Assemblyconv\bin\Debug\Assemblyconv.exe.config
+C:\Users\Subin\Documents\GitHub\ComArc\Assemblyconv\Assemblyconv\obj\Debug\Assemblyconv.exe
+C:\Users\Subin\Documents\GitHub\ComArc\Assemblyconv\Assemblyconv\obj\Debug\Assemblyconv.pdb
+C:\Users\Subin\Documents\GitHub\ComArc\Assemblyconv\Assemblyconv\bin\Debug\Assemblyconv.exe
+C:\Users\Subin\Documents\GitHub\ComArc\Assemblyconv\Assemblyconv\bin\Debug\Assemblyconv.pdb
+C:\Users\Subin\Documents\GitHub\ComArc\Assemblyconv\Assemblyconv\obj\Debug\Assemblyconv.csprojResolveAssemblyReference.cache

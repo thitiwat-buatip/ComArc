@@ -49,7 +49,7 @@ namespace Assemblyconv
                 return "111";
             }
             else
-                return "KuySubin";
+                return "don't Know";
         }
         static string ConvertR(string code)
         {
@@ -86,7 +86,6 @@ namespace Assemblyconv
             else if (word[1] == "halt")
             {
                 re += "110";
-                re += R(word[2]);
                 re += "000000000000000000000";
                 
             }
