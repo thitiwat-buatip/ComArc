@@ -4,3 +4,9 @@ C:\Users\Subin\Documents\Comarc\Simmulator\Simmulator\bin\Debug\Simmulator.pdb
 C:\Users\Subin\Documents\Comarc\Simmulator\Simmulator\obj\Debug\Simmulator.csprojResolveAssemblyReference.cache
 C:\Users\Subin\Documents\Comarc\Simmulator\Simmulator\obj\Debug\Simmulator.exe
 C:\Users\Subin\Documents\Comarc\Simmulator\Simmulator\obj\Debug\Simmulator.pdb
+C:\Users\Subin\Documents\GitHub\ComArc\Simmulator\Simmulator\bin\Debug\Simmulator.exe.config
+C:\Users\Subin\Documents\GitHub\ComArc\Simmulator\Simmulator\obj\Debug\Simmulator.exe
+C:\Users\Subin\Documents\GitHub\ComArc\Simmulator\Simmulator\obj\Debug\Simmulator.pdb
+C:\Users\Subin\Documents\GitHub\ComArc\Simmulator\Simmulator\bin\Debug\Simmulator.exe
+C:\Users\Subin\Documents\GitHub\ComArc\Simmulator\Simmulator\bin\Debug\Simmulator.pdb
+C:\Users\Subin\Documents\GitHub\ComArc\Simmulator\Simmulator\obj\Debug\Simmulator.csprojResolveAssemblyReference.cache
