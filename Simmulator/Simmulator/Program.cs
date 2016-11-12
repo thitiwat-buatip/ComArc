@@ -33,8 +33,44 @@ namespace Simmulator
                     }
                     front += DecitoBi(s);
                 }
+                else
+                {
+                    front = DecitoBi(s);
+                }
                 Console.WriteLine(front);
+                string opcode = front.Substring(7, 3);
+                Console.Write( "opcode : " + opcode);
+                switch (opcode)
+                {
+                    case "000":
+                        Console.WriteLine("  Add");
+                        break;
+                    case "001":
+                        Console.WriteLine(" Nand");
+                        break;
+                    case "010":
+                        Console.WriteLine(" LW");
+                        break;
+                    case "011":
+                        Console.WriteLine(" SW");
+                        break;
+                    case "100":
+                        Console.WriteLine(" Beq");
+                        break; 
+                    case "101":
+                        Console.WriteLine(" Jalr");
+                        break;
+                    case "110":
+                        Console.WriteLine(" Halt");
+                        break;
+                    case "111":
+                        Console.WriteLine(" Noop");
+                        break;
+
+                }
+                    
             }
+
 
             Console.ReadKey();
         }
