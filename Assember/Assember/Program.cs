@@ -56,7 +56,7 @@ namespace Assember
                 return "111";
             }
             else
-                return "KuySubin";
+                return "Dont know";
         }
         static string ConvertR(string code)
         {
@@ -181,7 +181,6 @@ namespace Assember
             string[] lines = System.IO.File.ReadAllLines(filelocation);
             
             List<Label> labelei = new List<Label>();
-            List<Label> fill = new List<Label>();
 
             foreach (string s in lines)
                 Console.WriteLine(s);
@@ -192,34 +191,22 @@ namespace Assember
                                 
                 if (word[0] != "")
                 {
-                    if (word[1] == ".fill")
-                    {
-                        fill.Add(new Label(word[0], word[2]));
-                    }
-                    else
                     labelei.Add(new Label(word[0], Convert.ToString(i)));
                 }
                 
             }
 
-            
-            for (int i = 0; i < lines.Length; i++)
-            {
-                foreach(Label k in fill)
-                {
-                    lines[i] = lines[i].Replace(k.label, k.value);
-                }
-            }
             for (int i = 0; i < lines.Length; i++)
             {
                 
                 foreach (Label k in labelei)
                 {
                     string[] word = lines[i].Split('\t');
-                    if (word[1] == "beq" && word[4].Length > 2)
+                    if (word[1] == "beq" && word[4].Length > 3)
                     {                        
                         word[4] = Convert.ToString(Convert.ToInt32(k.value) - (i + 1));
                         lines[i] = word[0] + "\t" + word[1] + "\t" + word[2] + "\t" + word[3] + "\t" + word[4];
+                        Console.WriteLine(word[4]);
                     }
                                       
                         lines[i] = lines[i].Replace(k.label, k.value);
@@ -231,11 +218,7 @@ namespace Assember
             {
                 Console.WriteLine(l.label+"  "+l.value);
             }
-            Console.WriteLine("\n");
-            foreach (Label l in fill)
-            {
-                Console.WriteLine(l.label + "  " + l.value);
-            }
+
             
             foreach (string s in lines)
             {
