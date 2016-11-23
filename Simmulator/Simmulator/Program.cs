@@ -12,6 +12,24 @@ namespace Simmulator
         static int[] reg;
         static int[] memory;
         static int pc;
+        static int j;
+        static string Invers(string code)
+        {
+            string Text="";
+            int k = code.Length;
+            for (int i =0; i < k; i++)
+            {
+                if(code[i] == 1)
+                {
+                    Text += "0";
+                }
+               else  if (code[i] == 0)
+                {
+                    Text += "1";
+                }
+            }
+            return Text;
+        }
 
         static string Reverse(string text)
         {
@@ -26,20 +44,38 @@ namespace Simmulator
 
         static int BinarytoDecimal (string binary)
         {
-            int dec=0;
-            string bin = Reverse(binary);
-            for (int i = 0; i < binary.Length; i++)
-            {
-                dec += Convert.ToInt32(bin[i])* (2 ^ i);
-
-            }
+            int dec = 0;
+            dec = Convert.ToInt32(binary, 2);
             return dec;
+        }
+        static string GenCode(int mem)
+        {
+            string code = Convert.ToString(mem);
+            string front = "";
+            int lenght;
+            lenght = DecitoBi(code).Length;
+            if (lenght < 32)
+            {
+                front = "";// empty string
+                for (int i = 0; i < 32 - lenght; i++)
+                {
+                    front += "0";
+                }
+                front += DecitoBi(code);
+            }
+            else
+            {
+                front = DecitoBi(code);
+            }
+            return front;
+
         }
 
         static void Add(string code)
         {
-            string regA = code.Substring(11, 3);
-            string regB = code.Substring(14, 3);
+            pc++;
+            string regA = code.Substring(10, 3);
+            string regB = code.Substring(13, 3);
             string destReg = code.Substring(30, 2);
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
@@ -47,73 +83,93 @@ namespace Simmulator
             reg[dReg] = reg[rA] + reg[rB];
             
             
+            
         }
 
         static void Nand(string code)
         {
-            string regA = code.Substring(11, 3);
-            string regB = code.Substring(14, 3);
+            pc++;
+            string regA = code.Substring(10, 3);
+            string regB = code.Substring(13, 3);
             string destReg = code.Substring(30, 2);
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
             int dReg = BinarytoDecimal(destReg);
             reg[dReg] = ~(reg[rA] & reg[rB]);
+            
 
         }
         static void LW(string code)
         {
-            string regA = code.Substring(11, 3);
-            string regB = code.Substring(14, 3);
-            string offsetField = code.Substring(17, 14);
+            pc++;
+            string regA = code.Substring(10, 3);
+            string regB = code.Substring(13, 3);
+            string offsetField = code.Substring(17, 15);
+            
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
             int offset = BinarytoDecimal(offsetField);
             reg[rB] = (memory[reg[rA] + offset]);
+            
 
 
         }
 
         static void Beq(string code)
         {
-
-            string regA = code.Substring(11, 3);
-            string regB = code.Substring(14, 3);
-            string offsetField = code.Substring(17, 14);
+            pc++;
+            string regA = code.Substring(10, 3);
+            string regB = code.Substring(13, 3);
+            string offsetField = code.Substring(17, 15);
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
             int offset = BinarytoDecimal(offsetField);
-            if (reg[rA] == reg[rB])
+            Console.WriteLine(rA + " " + rB + " " + offset);
+            Console.WriteLine(pc);
+            if(offset >= j)
             {
-                pc = pc + 1 + offset;   
+                
+               // offset = (BinarytoDecimal());
             }
+            
+            if (reg[rB] == 0)
+            {
+                pc = pc + offset;   
+            }
+            
         }
 
         static void SW(string code)
         {
-
-            string regA = code.Substring(11, 3);
-            string regB = code.Substring(14, 3);
-            string offsetField = code.Substring(17, 14);
+            pc++;
+            string regA = code.Substring(10, 3);
+            string regB = code.Substring(13, 3);
+            string offsetField = code.Substring(17, 15);
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
             int offset = BinarytoDecimal(offsetField);
             memory[reg[rA] + offset] = reg[rB];
+            
         }
 
         static void Halt(string code)
         {
-
+            
         }
 
         static void Jalr(string code)
         {
-            string regA = code.Substring(11, 3);
-            string regB = code.Substring(14, 3);
+            string regA = code.Substring(10, 3);
+            string regB = code.Substring(13, 3);
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
             reg[rB] = pc + 1;
             pc = reg[rA];
             
+        }
+        static void Noop(string code)
+        {
+
         }
         static string DecitoBi(string mcode)
             
@@ -122,70 +178,102 @@ namespace Simmulator
             bi   = Convert.ToString(Convert.ToInt32(mcode), 2);
             return bi;
         }
+
+        static void PrintState(int pc)
+        {
+            Console.WriteLine("@@@");
+            Console.WriteLine("state:");
+            Console.WriteLine("\t"+"PC " + pc);
+            Console.WriteLine("\t"+"memory:");
+            for(int i=0;i<j;i++)
+            {
+                Console.WriteLine("\t"+"\t"+"mem[" + i + "]" + memory[i]);
+            }
+            Console.WriteLine("\t"+"register");
+            for (int i = 0; i < 8; i++)
+            {
+                Console.WriteLine("\t"+"\t"+"reg[" + i + "]" + reg[i]);
+            }
+            Console.WriteLine("End");
+
+        }
         static void Main(string[] args)
         {
-            int pc = 0;
-            int[] memory = new int[1000];
-            int[] reg = new int[8];
+            pc = 0;
+            memory = new int[1000];
+            reg = new int[8];
+            //set reg = 0
+            for (int k = 0; k < 8; k++)
+            {
+                reg[k] = 0;
+            }
+
             string filelocation = @"C:\Users\Subin\Documents\GitHub\ComArc\MCcode.txt";
             string[] lines = System.IO.File.ReadAllLines(filelocation);
-            int lenght;
-            string front = "";// empty string
+
+            j = 0;
+            string code;
+
             foreach (string s in lines)
             {
-               pc++;
-               lenght =  DecitoBi(s).Length;
-                if(lenght < 32)
+                memory[j] = Convert.ToInt32(s);
+                code = GenCode(memory[j]);
+                Console.WriteLine("memmory[" + j + "]=" + memory[j]);
+                Console.WriteLine(code);
+
+                j++;
+
+            }
+            Console.WriteLine(Invers("1111111111111101"));
+
+
+            /*bool i = true;
+            while (i)
+            {
+                PrintState(pc);
+                code = GenCode(memory[pc]);
+                string opcode = code.Substring(7, 3);
+                if (opcode == "110")
                 {
-                    front = "";// empty string
-                    for ( int i = 0; i < 32 - lenght; i++)
-                    {
-                        front += "0";
-                    }
-                    front += DecitoBi(s);
+                    i = false;
                 }
-                else
-                {
-                    front = DecitoBi(s);
-                }
-                Console.WriteLine(front);
-                string opcode = front.Substring(7, 3);
-                Console.Write( "opcode : " + opcode);
                 switch (opcode)
                 {
                     case "000":
-                        Console.WriteLine("  Add");
+                        Add(code);
                         break;
                     case "001":
-                        Console.WriteLine(" Nand");
-                        break;
+                        Nand(code);
+                       break;
                     case "010":
-                        Console.WriteLine(" LW");
+                        LW(code);                     
                         break;
                     case "011":
-                        Console.WriteLine(" SW");
+                        SW(code);                       
                         break;
                     case "100":
-                        Console.WriteLine(" Beq");
-                        break; 
+                        Beq(code);                       
+                        break;
                     case "101":
-                        Console.WriteLine(" Jalr");
+                        Jalr(code);                       
                         break;
                     case "110":
-                        Console.WriteLine(" Halt");
+                        Halt(code);                      
                         break;
                     case "111":
-                        Console.WriteLine(" Noop");
+                        Noop(code);
                         break;
-
-                }
-                    
-            }
-
+                }*/
 
             Console.ReadKey();
+       
+
+            
+
+            
         }
 
 
     }
 }
+
