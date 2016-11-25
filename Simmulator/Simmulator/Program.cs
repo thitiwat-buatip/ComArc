@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simmulator
 {
-    
+
     class Program
     {
         static int[] reg;
@@ -15,15 +15,15 @@ namespace Simmulator
         static int j;
         static string Invers(string code)
         {
-            string Text="";
+            string Text = "";
             int k = code.Length;
-            for (int i =0; i < k; i++)
+            for (int i = 0; i < k; i++)
             {
-                if(code[i] == 1)
+                if (code[i] == 1)
                 {
                     Text += "0";
                 }
-               else  if (code[i] == 0)
+                else if (code[i] == 0)
                 {
                     Text += "1";
                 }
@@ -42,7 +42,7 @@ namespace Simmulator
             return reverse;
         }
 
-        static int BinarytoDecimal (string binary)
+        static int BinarytoDecimal(string binary)
         {
             int dec = 0;
             dec = Convert.ToInt32(binary, 2);
@@ -81,9 +81,9 @@ namespace Simmulator
             int rB = BinarytoDecimal(regB);
             int dReg = BinarytoDecimal(destReg);
             reg[dReg] = reg[rA] + reg[rB];
-            
-            
-            
+
+
+
         }
 
         static void Nand(string code)
@@ -96,7 +96,7 @@ namespace Simmulator
             int rB = BinarytoDecimal(regB);
             int dReg = BinarytoDecimal(destReg);
             reg[dReg] = ~(reg[rA] & reg[rB]);
-            
+
 
         }
         static void LW(string code)
@@ -105,12 +105,12 @@ namespace Simmulator
             string regA = code.Substring(10, 3);
             string regB = code.Substring(13, 3);
             string offsetField = code.Substring(17, 15);
-            
+
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
             int offset = BinarytoDecimal(offsetField);
             reg[rB] = (memory[reg[rA] + offset]);
-            
+
 
 
         }
@@ -120,23 +120,23 @@ namespace Simmulator
             pc++;
             string regA = code.Substring(10, 3);
             string regB = code.Substring(13, 3);
-            string offsetField = code.Substring(17, 15);
+            string offsetField = code.Substring(16, 16);
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
-            int offset = BinarytoDecimal(offsetField);
+            int offset = Convert.ToInt16(offsetField,2);
             Console.WriteLine(rA + " " + rB + " " + offset);
             Console.WriteLine(pc);
-            if(offset >= j)
+            if (offset >= j)
             {
-                
-               // offset = (BinarytoDecimal());
+
+                // offset = (BinarytoDecimal());
             }
-            
+
             if (reg[rB] == 0)
             {
-                pc = pc + offset;   
+                pc = pc + offset;
             }
-            
+
         }
 
         static void SW(string code)
@@ -144,17 +144,17 @@ namespace Simmulator
             pc++;
             string regA = code.Substring(10, 3);
             string regB = code.Substring(13, 3);
-            string offsetField = code.Substring(17, 15);
+            string offsetField = code.Substring(16, 16);
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
             int offset = BinarytoDecimal(offsetField);
             memory[reg[rA] + offset] = reg[rB];
-            
+
         }
 
         static void Halt(string code)
         {
-            
+
         }
 
         static void Jalr(string code)
@@ -165,17 +165,17 @@ namespace Simmulator
             int rB = BinarytoDecimal(regB);
             reg[rB] = pc + 1;
             pc = reg[rA];
-            
+
         }
         static void Noop(string code)
         {
 
         }
         static string DecitoBi(string mcode)
-            
+
         {
             string bi;
-            bi   = Convert.ToString(Convert.ToInt32(mcode), 2);
+            bi = Convert.ToString(Convert.ToInt32(mcode), 2);
             return bi;
         }
 
@@ -183,16 +183,16 @@ namespace Simmulator
         {
             Console.WriteLine("@@@");
             Console.WriteLine("state:");
-            Console.WriteLine("\t"+"PC " + pc);
-            Console.WriteLine("\t"+"memory:");
-            for(int i=0;i<j;i++)
+            Console.WriteLine("\t" + "PC " + pc);
+            Console.WriteLine("\t" + "memory:");
+            for (int i = 0; i < j; i++)
             {
-                Console.WriteLine("\t"+"\t"+"mem[" + i + "]" + memory[i]);
+                Console.WriteLine("\t" + "\t" + "mem[" + i + "]" + memory[i]);
             }
-            Console.WriteLine("\t"+"register");
+            Console.WriteLine("\t" + "register");
             for (int i = 0; i < 8; i++)
             {
-                Console.WriteLine("\t"+"\t"+"reg[" + i + "]" + reg[i]);
+                Console.WriteLine("\t" + "\t" + "reg[" + i + "]" + reg[i]);
             }
             Console.WriteLine("End");
 
@@ -224,10 +224,9 @@ namespace Simmulator
                 j++;
 
             }
-            Console.WriteLine(Invers("1111111111111101"));
 
 
-            /*bool i = true;
+            bool i = true;
             while (i)
             {
                 PrintState(pc);
@@ -244,36 +243,37 @@ namespace Simmulator
                         break;
                     case "001":
                         Nand(code);
-                       break;
+                        break;
                     case "010":
-                        LW(code);                     
+                        LW(code);
                         break;
                     case "011":
-                        SW(code);                       
+                        SW(code);
                         break;
                     case "100":
-                        Beq(code);                       
+                        Beq(code);
                         break;
                     case "101":
-                        Jalr(code);                       
+                        Jalr(code);
                         break;
                     case "110":
-                        Halt(code);                      
+                        Halt(code);
                         break;
                     case "111":
                         Noop(code);
                         break;
-                }*/
+                }
 
-            Console.ReadKey();
-       
+                Console.ReadKey();
 
-            
 
-            
+
+
+
+            }
+
+
         }
-
-
     }
-}
 
+}
