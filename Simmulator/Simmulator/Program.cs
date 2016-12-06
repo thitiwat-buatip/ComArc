@@ -45,7 +45,7 @@ namespace Simmulator
         static int BinarytoDecimal(string binary)
         {
             int dec = 0;
-            dec = Convert.ToInt32(binary, 2);
+            dec = Convert.ToInt16(binary, 2);
             return dec;
         }
         static string GenCode(int mem)
@@ -76,11 +76,12 @@ namespace Simmulator
             pc++;
             string regA = code.Substring(10, 3);
             string regB = code.Substring(13, 3);
-            string destReg = code.Substring(30, 2);
+            string destReg = code.Substring(29,3);
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
             int dReg = BinarytoDecimal(destReg);
             reg[dReg] = reg[rA] + reg[rB];
+            Console.Write(rA + " " + rB + " " + dReg);
 
 
 
@@ -91,7 +92,7 @@ namespace Simmulator
             pc++;
             string regA = code.Substring(10, 3);
             string regB = code.Substring(13, 3);
-            string destReg = code.Substring(30, 2);
+            string destReg = code.Substring(29, 3);
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
             int dReg = BinarytoDecimal(destReg);
@@ -124,15 +125,9 @@ namespace Simmulator
             int rA = BinarytoDecimal(regA);
             int rB = BinarytoDecimal(regB);
             int offset = Convert.ToInt16(offsetField,2);
-            Console.WriteLine(rA + " " + rB + " " + offset);
-            Console.WriteLine(pc);
-            if (offset >= j)
-            {
+            Console.Write(rA + " " + rB + " " + offset + "\n");
 
-                // offset = (BinarytoDecimal());
-            }
-
-            if (reg[rB] == 0)
+            if (reg[rA]==reg[rB])
             {
                 pc = pc + offset;
             }
@@ -189,12 +184,12 @@ namespace Simmulator
             {
                 Console.WriteLine("\t" + "\t" + "mem[" + i + "]" + memory[i]);
             }
-            Console.WriteLine("\t" + "register");
+            Console.WriteLine("\t" + "register:");
             for (int i = 0; i < 8; i++)
             {
                 Console.WriteLine("\t" + "\t" + "reg[" + i + "]" + reg[i]);
             }
-            Console.WriteLine("End");
+            Console.WriteLine("end state");
 
         }
         static void Main(string[] args)
@@ -208,7 +203,7 @@ namespace Simmulator
                 reg[k] = 0;
             }
 
-            string filelocation = @"C:\Users\Subin\Documents\GitHub\ComArc\MCcode.txt";
+            string filelocation = @"C:\Users\Subin\Documents\GitHub\ComArc\Assember\Assember\bin\Debug\MACCODE.txt";   
             string[] lines = System.IO.File.ReadAllLines(filelocation);
 
             j = 0;
@@ -227,6 +222,7 @@ namespace Simmulator
 
 
             bool i = true;
+            int inst = 0;
             while (i)
             {
                 PrintState(pc);
@@ -263,14 +259,18 @@ namespace Simmulator
                         Noop(code);
                         break;
                 }
-
-                Console.ReadKey();
-
-
-
-
-
+                inst++;
+                
             }
+            Console.WriteLine("machine halted");
+            Console.WriteLine("total of " + inst + "onstruction executed");
+            Console.WriteLine("final state of machine:");
+            pc++;
+            PrintState(pc);
+            Console.ReadKey();
+
+            
+            
 
 
         }

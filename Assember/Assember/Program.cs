@@ -114,12 +114,12 @@ namespace Assember
                 }
                 else
                 {
-                    l = Convert.ToString(Convert.ToInt32(word[4]), 2).Length;
+                    l = Convert.ToString(Convert.ToInt16(word[4]), 2).Length;
                     for (int i = 0; i < 16 - l; i++)
                     {
                         re += "0";
                     }
-                    re += Convert.ToString(Convert.ToInt32(word[4]), 2);
+                    re += Convert.ToString(Convert.ToInt16(word[4]), 2);
                 }
 
 
@@ -136,12 +136,12 @@ namespace Assember
                 }
                 else
                 {
-                    l = Convert.ToString(Convert.ToInt32(word[4]), 2).Length;
+                    l = Convert.ToString(Convert.ToInt16(word[4]), 2).Length;
                     for (int i = 0; i < 16 - l; i++)
                     {
                         re += "0";
                     }
-                    re += Convert.ToString(Convert.ToInt32(word[4]), 2);
+                    re += Convert.ToString(Convert.ToInt16(word[4]), 2);
                 }
 
 
@@ -158,7 +158,7 @@ namespace Assember
                 }
                 else
                 {
-                    l = Convert.ToString(Convert.ToInt32(word[4]), 2).Length;
+                    l = Convert.ToString(Convert.ToInt16(word[4]), 2).Length;
                     for (int i = 0; i < 16 - l; i++)
                     {
                         re += "0";
@@ -170,14 +170,14 @@ namespace Assember
             }
             else if (word[1] == ".fill")
             {
-                re = Convert.ToString(Convert.ToInt32(word[2]), 2);
+                re = Convert.ToString(Convert.ToInt16(word[2]), 2);
             }
             re = Convert.ToString(Convert.ToInt32(re, 2));
             return re;
         }
         static void Main(string[] args)
         {
-            string filelocation = @"C:\Users\Subin\Documents\GitHub\ComArc\Acode.txt";
+            string filelocation = @"C:\Users\Subin\Documents\GitHub\ComArc\Multiple.txt";
             string[] lines = System.IO.File.ReadAllLines(filelocation);
             
             List<Label> labelei = new List<Label>();
@@ -195,6 +195,7 @@ namespace Assember
                 }
                 
             }
+            int temp;
 
             for (int i = 0; i < lines.Length; i++)
             {
@@ -202,29 +203,43 @@ namespace Assember
                 foreach (Label k in labelei)
                 {
                     string[] word = lines[i].Split('\t');
-                    if (word[1] == "beq" && word[4].Length > 3)
-                    {                        
-                        word[4] = Convert.ToString(Convert.ToInt32(k.value) - (i + 1));
+                                                         
+                    if (word[1] == "beq"&&k.label==word[4]&& int.TryParse(word[4], out temp)== false)
+                    {
+                       
+                        word[4] = Convert.ToString(Convert.ToInt16(k.value) - (i + 1));
                         lines[i] = word[0] + "\t" + word[1] + "\t" + word[2] + "\t" + word[3] + "\t" + word[4];
                         Console.WriteLine(word[4]);
                     }
                                       
                         lines[i] = lines[i].Replace(k.label, k.value);
-                    
+
+
                 }
+                
+
             }
+            foreach (string s in lines)
+                Console.WriteLine(s);
 
             foreach (Label l in labelei)
             {
                 Console.WriteLine(l.label+"  "+l.value);
             }
 
-            
+           
+            string code = "";
             foreach (string s in lines)
             {
-                
+                code = code + ConvertR(s) + Environment.NewLine;
                 Console.WriteLine(ConvertR(s));
+                
+                
+              
+                
+
             }
+            System.IO.File.WriteAllText("MACCODE.txt", code);
             Console.ReadKey();
 
 

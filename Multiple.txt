@@ -1,0 +1,19 @@
+	lw	0	1	A
+	lw	0	2	B
+	lw	0	4	one
+	add	1	0	5
+start	beq	2	0	end
+	nand	4	2	6
+	nand	6	6	6
+	beq	6	0	noadd
+	add	3	5	3
+noadd	nand	4	4	6
+	nand	2	6	2
+	nand	2	2	2
+	add	4	4	4
+	add	5	5	5
+	beq	0	0	start
+end	halt
+one	.fill	1
+A	.fill	3
+B	.fill	2
