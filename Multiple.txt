@@ -15,5 +15,5 @@ noadd	nand	4	4	6
 	beq	0	0	start
 end	halt
 one	.fill	1
-A	.fill	3
-B	.fill	2
+A	.fill	6345
+B	.fill	1111

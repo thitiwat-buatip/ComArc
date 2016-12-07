@@ -1,0 +1,46 @@
+	lw	0	1	inputN
+	lw	0	2	inputR
+	lw	0	6	combAdd
+	jalr	6	7		7=return address
+	halt
+combine	lw	0	6	pos1	temp = 1
+	sw	5	7	stack	return address > stack
+	add	5	6	5	sp++ = 1
+	sw	5	1	stack	inputN > stack
+	add	5	6	5	sp++ = 2
+	sw	5	2	stack	inputR > stack	
+	add	5	6	5	sp++ = 3
+	beq	1	2	return1	(n==r)
+	beq	0	2	return1	or (r==0)
+	lw	0	6	neg1	temp = -1
+	add	1	6	1	n = n-1
+	lw	0	6	combAdd
+	jalr	6	7		call combine(n-1 ,r)
+	sw	5	3	stack	3 > stack
+	lw	0	6	pos1	temp = 1
+	add	5	6	5	sp++	sp = 4 now
+	lw	0	6	neg1	temp = -1
+	add	2	6	2	r=-r-1
+	lw	0	6	combAdd
+	jalr	6	7		call combine(n-1,r-1)
+	lw	0	6	neg1	temp = -1
+	add	5	6	5	sp-- = 3
+	lw	5	6	stack	load 3 from stack
+	add	6	3	3
+	beq	0	0	return
+return1	lw	0	6	pos1
+	add	6	0	3
+return	lw	0	6	neg1
+	add	5	6	5	sp-- =2
+	lw	5	2	stack	2 < sp
+	add	5	6	5	sp-- =1
+	lw	5	1	stack	1 < sp
+	add	5	6	5	sp-- =0
+	lw	5	7	stack	7 < sp
+	jalr	7	6
+combAdd	.fill	combine
+pos1	.fill	1
+inputN	.fill	12
+inputR	.fill	4
+neg1	.fill	-1
+stack	.fill	0

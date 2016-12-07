@@ -236,9 +236,11 @@ namespace Simmulator
                 {
                     case "000":
                         Add(code);
+                        Console.Write("add");
                         break;
                     case "001":
                         Nand(code);
+                        Console.Write("nand");
                         break;
                     case "010":
                         LW(code);
@@ -258,19 +260,22 @@ namespace Simmulator
                     case "111":
                         Noop(code);
                         break;
+
                 }
+                
                 inst++;
                 
             }
             Console.WriteLine("machine halted");
-            Console.WriteLine("total of " + inst + "onstruction executed");
+            Console.WriteLine("total of " + inst + " Instruction executed");
             Console.WriteLine("final state of machine:");
             pc++;
             PrintState(pc);
             Console.ReadKey();
 
-            
-            
+
+
+
 
 
         }

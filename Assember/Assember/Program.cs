@@ -87,7 +87,7 @@ namespace Assember
                 re += "101";
                 re += R(word[2]);
                 re += R(word[3]);
-                re += "000000000000000";
+                re += "0000000000000000";
 
             }
             else if (word[1] == "halt")
@@ -170,14 +170,14 @@ namespace Assember
             }
             else if (word[1] == ".fill")
             {
-                re = Convert.ToString(Convert.ToInt16(word[2]), 2);
+                re = Convert.ToString(Convert.ToInt32(word[2]), 2);
             }
             re = Convert.ToString(Convert.ToInt32(re, 2));
             return re;
         }
         static void Main(string[] args)
         {
-            string filelocation = @"C:\Users\Subin\Documents\GitHub\ComArc\Multiple.txt";
+            string filelocation = @"C:\Users\Subin\Documents\GitHub\ComArc\back-up.txt";
             string[] lines = System.IO.File.ReadAllLines(filelocation);
             
             List<Label> labelei = new List<Label>();
